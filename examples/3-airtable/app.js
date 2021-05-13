@@ -2,8 +2,7 @@ const result = document.querySelector('.result')
 
 const fetchProducts = async () => {
   try {
-    // const { data } = await axios.get('/api/3-airtable')
-    const { data } = await axios.get('/api/3-z-complete')
+    const { data } = await axios.get('/api/3-airtable')
     const products = data
       .map((product) => {
         const { id, url, name, price } = product
@@ -12,11 +11,10 @@ const fetchProducts = async () => {
      <div class="info">
      <h5>${name}</h5>
      <h5 class="price">$${price}</h5>
-
      </div>
      </a>`
-      })
-      .join('')
+      }).join('')
+      
     result.innerHTML = products
   } catch (error) {
     result.innerHTML = '<h4>There was an error</h4>'
