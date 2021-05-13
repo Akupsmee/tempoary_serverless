@@ -1,20 +1,15 @@
-require('dotenv').config()
 const Airtable = require('airtable-node');
+const dotenv = require('dotenv').config();
 
-const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
+const airtable = new Airtable({ apiKey:process.env.AIRTABLE_API_KEY})
   .base('apppQ3QqijVydRuf2')
   .table('products')
- 
-airtable.list().then(resp => {
-  console.log(resp)
-})
- 
 
 
 exports.handler = async (event, context, cb) => {
   try {
     const {records} = await airtable.list()
-    const products = records.map((product)=>{
+    const product = records.map((product)=>{
       const {id} = product
       const {name, image,price} = product.fields
       const url = image[0].url
@@ -22,13 +17,14 @@ exports.handler = async (event, context, cb) => {
     })
     return {
       statusCode: 200,
-      body: JSON.stringify(products)
+      body: JSON.st
+    
     }
   } catch (error) {
     return {
       statusCode: 500,
-       body: 'server error'
-      }
+      body:'Server error'
+    }
     
   }
     
